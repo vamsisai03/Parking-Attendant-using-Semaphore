@@ -1,0 +1,668 @@
+<html>
+<head>
+
+  <meta charset="UTF-8">
+  <title>Parking Attendant</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+
+  
+      <link rel="stylesheet" href="css/style.css">
+
+  
+
+<style>
+#car{
+text-align:center;
+font-size:20px;
+font-weight:bold;
+}
+#scooter{
+padding-left: 600px;
+background-color: rgba(255,255,255,0.3);
+}
+.borde{
+ border:1px solid black;
+}
+
+body {
+  margin: 0;
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  font-size: 18px
+}
+</style>
+</head>
+<body><br>
+<center>
+<h2 style="background-color:Tomato;width:40%;height:70px;text-align:middle;color:white;font-weight:bold;font-size:25px;border-radius:20px;"><br>Parking Attendant</h2><br>
+<div class="tp">
+<p>
+		<div style="font-weight:bold;color:white;background-color:#5f27cd;border-radius:20px;width:200px;height:20px;text-align:middle">Selection Guide</div><br><br>
+	    1. Park a vehicle&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+		2. How many vehicles are parked?<br><br>
+		3. How many cars are parked?&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+		4. How many scooters are parked?<br><br>
+		5. Whats the order the vehicles are parked in?&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+		6. Exit the parking lot<br><br>
+		7. Display the waiting queue<br><br>
+
+</p>
+</div>
+<center><br>
+<div class="tp2">
+<form id="f1">
+<div style="font-weight:bold;color:white;background-color:#5f27cd;border-radius:20px;width:300px;height:20px;text-align:middle">Enter Your Vehicle Details</div><br><br>
+Enter Your Selection: 
+<input type="text" id="i1"><br><br>
+Enter 1 for Car or 2 for Bike/Scooter:
+<input type="text" id="i2"><br><br>
+Enter Vehicle Registration Number here if you are parking:
+<input type="text" id="i3"><br><br>
+Enter Vehicle Registration Number here if you are exiting the parking:
+<input type="text" id="i4"><br><br>
+<input type="button" value="Proceed" class="hello" onclick="main();"><br><br>
+</form>
+ </div>
+ <section>
+ <div class="borde">
+  <div class="tbl-header">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <thead>
+	  <center>
+        <tr>
+          <th id="car" >Four wheeler</th>
+          
+        </tr>
+		</center>
+      </thead>
+    </table>
+  </div>
+  <div class="tbl-content">
+    <table cellpadding="0" cellspacing="0" border="5px solid black">
+      <tbody>
+        <tr>
+<td id="11cb">0</td>
+<td id="12cb">0</td>
+<td id="13cb">0</td>
+<td id="14cb">0</td>
+<td id="15cb">0</td>
+<td id="16cb">0</td>
+<td id="17cb">0</td>
+<td id="18cb">0</td>
+<td id="19cb">0</td>
+
+</tr>
+<tr>
+<td id="21cb">0</td>
+<td id="22cb">0</td>
+<td id="23cb">0</td>
+<td id="24cb">0</td>
+<td id="25cb">0</td>
+<td id="26cb">0</td>
+<td id="27cb">0</td>
+<td id="28cb">0</td>
+<td id="29cb">0</td>
+</tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="tbl-header">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <thead>
+	  <center>
+        <tr>
+          <th id="car" >Two wheeler</th>
+          
+        </tr>
+      </thead>
+		</center>
+    </table>
+  </div>
+  <div class="tbl-content">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <tbody>
+        <tr>
+<tr>
+<td id="31cb">0</td>
+<td id="32cb">0</td>
+<td id="33cb">0</td>
+<td id="34cb">0</td>
+<td id="35cb">0</td>
+<td id="36cb">0</td>
+<td id="37cb">0</td>
+<td id="38cb">0</td>
+<td id="39cb">0</td>
+</tr>
+<tr>
+<td id="41cb">0</td>
+<td id="42cb">0</td>
+<td id="43cb">0</td>
+<td id="44cb">0</td>
+<td id="45cb">0</td>
+<td id="46cb">0</td>
+<td id="47cb">0</td>
+<td id="48cb">0</td>
+<td id="49cb">0</td>
+</tr>
+      </tbody>
+    </table>
+  </div>
+  </div>
+</section>
+		<div style="font-weight:bold;color:white;background-color:Tomato;border-radius:20px;width:300px;height:25px;text-align:middle">Output Message Window</div><br><br>
+<div class="tp3"><br><br><p id="outp"></p></div><br>
+<p id="demo"></p>
+<script type="text/javascript">
+var tt1="";
+var tt2="";
+var tt3="";
+function myFunction2() {
+  document.getElementById("myDIV").style.backgroundColor = "white";
+  document.getElementById("myDIV").style.border= "2px solid orange";
+  document.getElementById("myDIV").style.borderRadius = "10px";
+  document.getElementById("myDIV").style.fontSize = "18px";
+  document.getElementById("myDIV").style.textAlign = "center";
+}
+
+var k=1;
+var CAR=1;
+var SCOOTER=2;
+var MAX=10;
+var top=-1;
+var num;
+var row;
+var col;
+var type;
+var waitqueue=new Array(MAX);
+var wait2=new Array(10);
+var t=-1;
+
+
+var choice, type, number, z=0, row = 0, col = 0; 
+var i;
+var tarr=new Array(2); 
+var finish = 1 ;
+
+var car=new Array(2);	
+for (var i = 0; i < 2; i++) {
+    car[i] = new Array(10);
+}
+
+var scooter=new Array(2);	
+for (var i = 0; i < 2; i++) {
+    scooter[i] = new Array(10);
+}
+
+var parkdetails=new Array(4);	
+for (var i = 0; i < 4; i++) {
+    parkdetails[i] = new Array(10);
+}
+
+for(var i=0;i<4;i++){	
+for (var j = 0; j < 10; j++) {
+    parkdetails[i][j]=0;
+}
+}
+
+var count_of_veh=0 ;
+var count_of_car=0 ; 
+var count_of_sc=0 ; 
+
+function changecol(col)
+{
+	col=col-1;
+}
+
+function add(type,number,row,col,parkdetails)
+{
+	console.log("add");
+	if(k==0){
+	     tt1="Wait Queue is full!!";
+        console.log("Wait Queue is full!! vamsi");
+    }
+	if ( type == CAR && k==1)
+    { 
+		P(); // wait
+        count_of_car++ ; //delay(1); 
+        parkdetails[row][col] = number ; 
+		console.log(number);
+		myFunctionc(number,type);		
+		count_of_veh++; 
+        V(); //signal 
+		tt1="Car Parked";
+		console.log("Car Parked");
+    }
+    else if(type== SCOOTER && k==1)
+    {  
+		P();
+        count_of_sc++ ; 
+		parkdetails[row][col] = number ; 
+		V(); 
+        count_of_veh++ ;
+		myFunctionc(number,type);	
+    }
+}
+function getfreerowcol(type,tarr){
+   
+					var r, c, fromrow = 0, torow = 2 ; 
+					if ( type == SCOOTER )
+					{
+						
+						fromrow = 2 ; torow =4 ;
+						console.log();
+					}
+					console.log(fromrow);
+					for ( r = fromrow ; r < torow ; r++ ) //fromrow=2 torow==4
+					{
+						
+						for ( c = 0 ; c < 9 ; c++ )
+						{
+							
+							if (parkdetails[r][c]==0)
+							{
+								console.log("hi");
+								tarr[0] = r ;
+								tarr[1] = c ; 
+								return ;
+							}
+						}
+					}
+				if ( r==2 || r == 4 )
+					{
+					    console.log("hi df");
+						tarr[0] = -1 ;
+						tarr[1] = -1 ;
+					}
+					console.log(tarr[1]);
+					
+}
+function getrcbyinfo(type,number,tarr,parkdetails){
+    var r, c, fromrow = 0, torow = 2 ; 
+	console.log("get in getrcby");
+	           if ( type == SCOOTER )
+                      {
+
+                        fromrow += 2 ; torow += 2 ;
+                       }
+               for ( r = fromrow ; r < torow ; r++ )
+                {
+
+                    for ( c = 0 ; c < 10 ; c++ )
+                    {
+
+                       if ( parkdetails[r][c] == number )
+                       {
+
+                       	tarr[0]=r;
+                       	tarr[1]=c;
+						searcht(number,type);
+                         parkdetails[r][c]=0;
+						 
+						 tt2="vehicle removed";
+						 console.log("vehicle removed");
+						 return ;
+                       }
+                    }
+                }
+                  if ( r == 2 || r == 4 )
+                    {
+                      tarr[0] = -1 ;
+                      tarr[1] = -1 ;
+                    }
+}
+
+function display( )
+{
+	/*var r, c ;
+	console.log("Cars ->\n" ) ; 
+	for ( r = 0 ; r < 4 ; r++ )
+	{
+		if ( r == 2 )
+		console.log( "Scooters ->\n" ) ; 
+		for ( c = 0 ; c < 9 ; c++ ) 
+			console.log( "%d\t", parkdetails[r][c] ) ; console.log ( "\n" ) ;
+    }*/
+	var r,c;
+	var tem="Four Wheelers:<br><br>";
+	for(r=0;r<4;r++)
+	{
+		if(r==2)
+		 tem=tem+"<br><br>Two Wheelers:<br><br>";
+		else if(r==1 || r==3)
+		 tem=tem+"<br>"
+		for(c=0;c<9;c++)
+
+			tem=tem+parkdetails[r][c]+"&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
+			
+	}
+	document.getElementById("outp").innerHTML=tem;
+}	
+function display_wq2(top)
+{
+   /* var i; 
+	if(top==-1)
+    {
+	 
+		console.log("\nWait Queue is empty!!");
+    }
+    else
+    {
+        console.log("\nWait Queue is...\n"); 
+		for(i=0;i<=top;i++) 
+			console.log("%d\t",waitqueue[i]);
+    }*/
+	
+	var i; 	
+	if(t==-1)
+    {
+	 
+		document.getElementById("outp").innerHTML="Wait Queue is empty!!";
+    }
+    else
+    {
+        var tem2="Wait Queue is:<br><br>"; 
+		
+		for(i=0;i<=t;i++) 
+		{
+			console.log(wait2[i]);
+			tem2=tem2 + wait2[i]+"&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
+			
+		}
+    }
+	document.getElementById("outp").innerHTML=tem2;
+}
+
+/*function display_wq()
+{
+    var i; 
+	if(top==-1)
+    {
+	 
+		console.log("\nWait Queue is empty!!");
+    }
+    else
+    {
+        console.log("\nWait Queue is...\n"); 
+		for(i=0;i<=top;i++) 
+			console.log("%d\t",waitqueue[i]);
+    }
+	
+	    var i; 
+		
+	if(top==-1)
+    {
+	 
+		document.getElementById("outp").innerHTML="Wait Queue is empty!!";
+    }
+    else
+    {
+        var tem2="Wait Queue is:<br><br>"); 
+		for(i=0;i<=top;i++) 
+			tem2=tem2+waitqueue[i];
+    }
+	document.getElementById("outp").innerHTML=tem2;
+}*/
+
+function main()
+{
+	console.log("Vamsi");
+	while ( finish )
+    {
+		console.log ( "\n Car Parking\n" ) ;
+		console.log ( "1. A vehicle has arrived!!\n" ) ;
+		console.log ( "2. How many vehicles are parked?\n" ) ; 
+		console.log ( "3. How many cars are parked?\n" ) ; 
+		console.log ( "4. How many scooters are parked?\n" ) ;
+		console.log ( "5. Whats the order the vehicles are parked in?\n" ) ; 
+		console.log ( "6. A vehicle is leaving!!\n" ) ;
+		console.log ( "7. See the wait queue\n" ) ; 
+		console.log ( "8. Bye bye!!\n" ) ;
+		var x=document.getElementById("f1");
+		var choice2=x.elements[0].value;
+		var choice = parseInt(choice2);		
+		document.getElementById("demo").innerHTML = choice;
+		switch ( choice )
+		{
+			case 1 :
+			tt="You may add your vehicle here: " ;
+				console.log ( "\nYou may add your vehicle here: \n" ) ; 
+				type = 0 ; 
+				while ( type != CAR && type !=SCOOTER )
+				{
+				    
+				   tt3="Is your vehicle a scooter or a car (1 for Car / 2 for Scooter ): ";
+					console.log ( "Is your vehicle a scooter or a car (1 for Car / 2 for Scooter ): \n" ) ; 
+					type=parseInt(x.elements[1].value); 
+					if ( type != CAR && type != SCOOTER)
+					console.log ( "\nOops looks like an invalid type.\n" ) ;
+				}
+				    
+				console.log ( "We would want your vehicle number: " ) ; 
+				   
+				number=parseInt(x.elements[2].value); 
+				console.log(number);
+				if ( type == CAR || type == SCOOTER )
+				{
+
+		                  getfreerowcol ( type, tarr ) ;
+				console.log(tarr[0]);
+				if ( tarr[0] != -1 && tarr[1] != -1 )
+				{
+					row = tarr[0] ; col = tarr[1] ; 
+					
+					if ( type == CAR )
+					{
+					console.log("before hi");
+					
+						car[row][col] = number;
+						add ( type, number,row, col,parkdetails ) ;
+						return;
+					}
+					else 
+					{
+					      console.log("before hi");
+                         scooter[row - 2][col] = number;
+						add ( type, number, row, col,parkdetails ) ;
+						return;
+					}
+				}
+				else 
+				{
+					if ( type == CAR )
+					{
+						
+						if(top == MAX-1)
+						{
+							alert("Oops seems like there is no parking slot for your vehicle!!Wait Queue is full!!");
+							
+						}	
+						else
+						{
+							t=t+1;
+							wait2[t]=number;
+							
+							top=top+1; 
+							waitqueue[top]=number;
+							console.log(top);
+							console.log(waitqueue[top]);
+							alert("Oops seems like there is no parking slot for your vehicle!! However you have been put in the waiting queue." ) ; 
+							return;
+						}
+					}
+					else
+					{
+						
+						if(top == MAX-1)
+						{
+							alert("Oops seems like there is no parking slot for your vehicle!! Wait Queue is full!!");
+						}
+						else
+						{
+						
+							t=t+1;
+							wait2[t]=number;
+							
+							top=top+1; waitqueue[top]=number;
+							console.log(waitqueue[top]);
+							alert("Oops seems like there is no parking slot for your vehicle!! However you have been put in the waiting queue." ) ; 
+
+							return;
+						}
+					}
+				}
+		}
+		else
+		{
+			console.log ( "Oops seems like an invalid type\n" ) ; break ;
+		}
+		console.log ( "\nU may press any key to continue" ); 
+		break ; 
+		case 2 :
+		    console.log("Enter case 2");
+			document.getElementById("outp").innerHTML="The total number of vehicles parked are: " + count_of_veh  ;
+			console.log(count_of_veh);
+			return;
+			console.log ( "\nU may press any key to continue" );
+		break ; 
+case 3 :
+      console.log ( "The total number of cars parked are: %d\n",count_of_car ) ; 
+	  document.getElementById("outp").innerHTML="The total number of four wheelers parked are: " + count_of_car  ;
+	  return;
+       console.log ( "\nU may press any key to continue" ); 
+       break ; 
+case 4 :
+      console.log ( "The total number of scooters parked are: %d\n",count_of_sc ) ; 
+	  document.getElementById("outp").innerHTML="The total number of two wheelers parked are: " + count_of_sc  ;
+	  return;
+      console.log ( "\nU may press any key to continue" );
+	  break ; 
+case 5 :
+      console.log ( "This is what the final display looks like\n" ) ; display( ) ; 
+	  return;
+      console.log ( "\nU may press any key to continue" ); 
+      break ; 
+case 6 :
+    console.log ( "Departure\n" ) ; type = 0 ;
+     while ( type != CAR && type !=SCOOTER )
+        {
+         console.log ( "Is your vehicle a scooter or a car (1 for Car / 2 for Scooter ): \n" ) ; 
+		 //scanf ( "%d", &type ) ;
+		 type=parseInt(x.elements[1].value);
+          if ( type != CAR && type != SCOOTER)
+              console.log ( "\nOops looks like an invalid type.\n" ) ;
+        }
+    console.log ( "We would want your vehicle number: " ) ; //scanf ( "%d", &number ) ; 
+	number=parseInt(x.elements[3].value); 
+	console.log("tarun1");
+    if( type == CAR || type == SCOOTER )
+   {
+console.log("tarun2");
+	getrcbyinfo (type,number,tarr,parkdetails) ;
+	
+              console.log("tarun3"); 
+				return;
+	
+}
+      else
+      {
+	   console.log("tarun4");    
+       if ( type != CAR )
+         console.log ( "\nOops looks like an invalid car number\n" ) ; 
+	   else 
+         console.log ( "\nOops looks like an invalid scooter number\n" ) ;
+      }
+        console.log ( "\nU may press any key to continue" ) ;
+        break ; 
+		
+		
+		
+ case 7 :
+			display_wq2();
+			//for(var i=0;i<10;i++)
+			 //console.log(waitqueue[i]);
+			
+        console.log ( "\nU may press any key to continue" ); 
+		return;
+        break ; 
+		/*
+  case 8 :
+     for ( row = 0 ; row < 2 ; row++ )
+     {
+        for ( col = 0 ; col < 10 ; col++ )
+        {
+           if (  num != 0 )
+              free ( car[row][col] ) ;
+             if ( scooter[row][col] num != 0 ) free ( scooter[row+2][col] ) ;
+        }
+     }
+             finish=0; 
+             break;*/
+}
+}
+ }
+
+      function P()
+      {
+       console.log("Vehicle is Parking.\n"); 
+	   while (k <= 0) {}
+       
+       
+         k = k - 1; 
+		 console.log(k);
+        
+      }
+function V()
+    { k = k + 1;
+	 console.log("k-");
+	}
+	
+function myFunctionc(searchdata,ty1) {
+var tyi;
+if (ty1==1){
+   tyi=2
+ }
+else if(ty1==2){
+   tyi=4;
+}
+  for(var i=0;i<tyi;i++){
+	    for(var j=0;j<10;j++){
+		 if(parkdetails[i][j] == searchdata){
+             
+                  var ids2=((i+1)*10+j+1).toString() ;
+		       	var ids1=ids2.concat("cb");
+			 document.getElementById(ids1).innerHTML = parkdetails[i][j];
+     document.getElementById(ids1).style.background = "#e84118";   
+    }
+	}
+	}
+
+}	
+
+function searcht(searchdata,ty1){
+var tyi;
+if (ty1==1){
+   tyi=2
+ }
+else if(ty1==2){
+   tyi=4;
+}
+    for(var i=0;i<tyi;i++){
+	    for(var j=0;j<10;j++){
+	     if(parkdetails[i][j] == searchdata){
+		     parkdetails[i][j]=0;
+			var ids2=((i+1)*10+j+1).toString() ;
+			var ids1=ids2.concat("cb");
+			 document.getElementById(ids1).innerHTML = parkdetails[i][j];
+     document.getElementById(ids1).style.background = "#78e08f";
+			
+		 }
+	  }
+	  
+	}
+}
+</script>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+    <script src="js/index.js"></script>
+</body>
+</html>
